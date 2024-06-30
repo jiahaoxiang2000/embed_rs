@@ -11,6 +11,8 @@ cortex-m-rt = "0.7.3"
 cortex-m-semihosting = "0.5.0"
 panic-halt = "0.2.0"
 
+
+
 # Uncomment for the panic example.
 # panic-itm = "0.4.1"
 
@@ -20,6 +22,9 @@ panic-halt = "0.2.0"
 # Uncomment for the device example.
 # Update `memory.x`, set target to `thumbv7em-none-eabihf` in `.cargo/config`,
 # and then use `cargo build --example device` to build it.
+[dependencies.stm32l4]
+version = "0.15.1"
+features = ["stm32l4x6"]
 # [dependencies.stm32f3]
 # features = ["stm32f303", "rt"]
 # version = "0.7.1"
