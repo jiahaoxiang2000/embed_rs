@@ -19,7 +19,6 @@ fn main() -> ! {
     let gpioa = p.GPIOA;
     let uart = p.USART1;
 
-
     // Enable clock for GPIOA and USART1
     rcc.ahb2enr.write(|w| w.gpioaen().set_bit());
     rcc.apb2enr.write(|w| w.usart1en().set_bit());
@@ -37,8 +36,8 @@ fn main() -> ! {
         .modify(|_, w| w.pupdr9().pull_up().pupdr10().pull_up());
 
     // Configure USART1: 115200 baud, 8 data bits, no parity, 1 stop bit
-    // Assuming a clock of 80MHz for USART1
-    uart.brr.write(|w| w.brr().bits(0x45)); // BRR = Clock / Baud = 80_000_000 / 115200
+    // Assuming a clock of 4MHz for USART1
+    uart.brr.write(|w| w.brr().bits(35)); // Rounded BRR = Clock / Baud = 4_000_000 / 115200
 
     uart.cr1.write(|w| {
         w.ue()
@@ -58,10 +57,9 @@ fn main() -> ! {
     uart.cr2.write(|w| w.stop().bits(0)); // 1 stop bit
 
     // Assuming `uart` is your USART1 peripheral instance
-    let msg = b"Hello, World!\r\n";
+    let msg = b"Hello, World! xjh!!\r\n";
 
     loop {
-
         for &byte in msg {
             // Wait for the transmit data register to be empty
             while uart.isr.read().txe().bit_is_clear() {}
@@ -72,7 +70,7 @@ fn main() -> ! {
 
         // Simple delay loop (not accurate, for demonstration only)
         // Adjust the count based on your system's clock speed for approximately 1 second
-        for _ in 0..8_000_000 {
+        for _ in 0..4_000 {
             cortex_m::asm::nop(); // No Operation (does nothing but waste time)
         }
     }
