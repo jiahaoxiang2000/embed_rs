@@ -1,8 +1,6 @@
 #![no_std]
 #![no_main]
 
-use cortex_m::{peripheral::syst, Peripherals};
-use cortex_m_semihosting::{debug, hprintln};
 // pick a panicking behavior
 use panic_halt as _; // you can put a breakpoint on `rust_begin_unwind` to catch panics
                      // use panic_abort as _; // requires nightly
