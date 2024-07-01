@@ -6,6 +6,10 @@
 // use panic_abort as _; // requires nightly
 // use panic_itm as _; // logs messages over ITM; requires ITM support
 
+mod exception;
+mod config;
+
+use config::sys_tick_config;
 // the semihosting need to change on the production version
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _; // logs messages to the host stderr; requires a debugger
@@ -15,6 +19,8 @@ use stm32l4::stm32l4x6;
 
 #[entry]
 fn main() -> ! {
+    sys_tick_config();
+
     let p = stm32l4x6::Peripherals::take().unwrap();
     let rcc = p.RCC;
 
@@ -30,7 +36,6 @@ fn main() -> ! {
     loop {
         // Toggle the LED light
         gpioe.odr.modify(|r, w| w.odr9().bit(!r.odr9().bit()));
-        panic!("panic will be work!");
         hprintln!("{}", msg);
 
         // Simple delay loop (not accurate, for demonstration only)
