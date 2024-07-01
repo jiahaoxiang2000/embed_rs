@@ -1,6 +1,9 @@
+//! Configuration module
+//! This module contains functions to configure the system timer (SysTick) and other peripherals
+
 use cortex_m::peripheral::syst::SystClkSource;
 
-/// Configures the system timer (SysTick), handler function is [`exception::SysTick`]
+/// Configures the system timer (SysTick), handler function is `embed_rs::exception::SysTick`
 ///
 pub fn sys_tick_config() {
     let p = cortex_m::Peripherals::take().unwrap();
