@@ -57,7 +57,16 @@ fn main() -> ! {
     // Assuming `uart` is your USART1 peripheral instance
     let msg = b"Hello, World! xjh!!\r\n";
 
+    // use the PE9 pin as a led light to show the program is running, blue light
+    let gpioe = p.GPIOE;
+    rcc.ahb2enr.write(|w| w.gpioeen().set_bit());
+    gpioe.moder.write(|w| w.moder9().output());
+    gpioe.odr.write(|w| w.odr9().set_bit());
+
     loop {
+        // Toggle the LED light
+        gpioe.odr.modify(|r, w| w.odr9().bit(!r.odr9().bit()));
+
         for &byte in msg {
             // Wait for the transmit data register to be empty
             while uart.isr.read().txe().bit_is_clear() {}
@@ -68,7 +77,7 @@ fn main() -> ! {
 
         // Simple delay loop (not accurate, for demonstration only)
         // Adjust the count based on your system's clock speed for approximately 1 second
-        for _ in 0..4_000 {
+        for _ in 0..8_000 {
             cortex_m::asm::nop(); // No Operation (does nothing but waste time)
         }
     }
