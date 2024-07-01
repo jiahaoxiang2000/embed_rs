@@ -6,7 +6,7 @@ name = "embed_rs"
 version = "0.1.0"
 license = "MIT"
 documentation = "https://docs.rs/embed_rs"
-desciption = "A template for embedded Rust projects"
+description = "A template for embedded Rust projects"
 repository = "https://github.com/jiahaoxiang2000/embed_rs"
 homepage = "https://github.com/jiahaoxiang2000/embed_rs"
 
