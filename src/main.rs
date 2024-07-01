@@ -24,6 +24,9 @@ fn main() -> ! {
     rcc.ahb2enr.write(|w| w.gpioeen().set_bit());
     gpioe.moder.write(|w| w.moder9().output());
     gpioe.odr.write(|w| w.odr9().set_bit());
+    let xs = [0, 1, 2];
+    let i = xs.len();
+    let _y = xs[i]; // out of bounds access
 
     loop {
         // Toggle the LED light
