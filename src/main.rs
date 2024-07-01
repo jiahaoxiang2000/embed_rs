@@ -1,12 +1,16 @@
 #![no_std]
 #![no_main]
 
-use cortex_m_semihosting::{hprint, hprintln};
+
+
 // pick a panicking behavior
 // use panic_halt as _; // you can put a breakpoint on `rust_begin_unwind` to catch panics
-                     // use panic_abort as _; // requires nightly
-                     // use panic_itm as _; // logs messages over ITM; requires ITM support
+// use panic_abort as _; // requires nightly
+// use panic_itm as _; // logs messages over ITM; requires ITM support
+
+// the semihosting need to change on the production version
 use panic_semihosting as _; // logs messages to the host stderr; requires a debugger
+use cortex_m_semihosting::hprintln;
 
 use cortex_m_rt::entry;
 use stm32l4::stm32l4x6;
@@ -32,7 +36,7 @@ fn main() -> ! {
         // Toggle the LED light
         gpioe.odr.modify(|r, w| w.odr9().bit(!r.odr9().bit()));
 
-       hprintln!("hello World, xjh");
+        hprintln!("hello World, xjh");
 
         // Simple delay loop (not accurate, for demonstration only)
         // Adjust the count based on your system's clock speed for approximately 1 second
