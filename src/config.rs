@@ -1,4 +1,5 @@
 //! Configuration module
+//! 
 //! This module contains functions to configure the system timer (SysTick) and other peripherals
 
 use cortex_m::peripheral::syst::SystClkSource;

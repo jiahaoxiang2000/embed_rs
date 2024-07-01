@@ -1,3 +1,8 @@
+//! # STM32L4 HAL
+//! 
+//! this project is learn the rust on embed, the used board is STM32L496.
+//! 
+
 #![no_std]
 #![no_main]
 

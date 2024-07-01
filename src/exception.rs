@@ -1,5 +1,6 @@
 //! Exception handling
-//! This module contains the exception handlers for the system timer (SysTick) and the hard fault handler
+//! 
+//! This module contains the exception handlers for the system timer (SysTick [`crate::config::sys_tick_config`]) and the hard fault handler
 //! 
 //! The exception that trigger by the hardware, the `interrupt` is mean trigger by the software. 
 
