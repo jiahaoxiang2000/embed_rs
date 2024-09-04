@@ -16,7 +16,7 @@ mod config;
 
 use config::sys_tick_config;
 // the semihosting need to change on the production version
-use cortex_m_semihosting::hprintln;
+// use cortex_m_semihosting::hprintln;
 use panic_semihosting as _; // logs messages to the host stderr; requires a debugger
 
 use cortex_m_rt::entry;
@@ -30,7 +30,7 @@ fn main() -> ! {
     let rcc = p.RCC;
 
     // Assuming `uart` is your USART1 peripheral instance
-    let msg = "Hello, World! xjh!!\r\n";
+    let _msg = "Hello, World! xjh!!\r\n";
 
     // use the PE9 pin as a led light to show the program is running, blue light
     let gpioe = p.GPIOE;
@@ -41,7 +41,7 @@ fn main() -> ! {
     loop {
         // Toggle the LED light
         gpioe.odr.modify(|r, w| w.odr9().bit(!r.odr9().bit()));
-        hprintln!("{}", msg);
+        // hprintln!("{}", msg);
 
         // Simple delay loop (not accurate, for demonstration only)
         // Adjust the count based on your system's clock speed for approximately 1 second
